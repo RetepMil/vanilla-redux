@@ -12,7 +12,9 @@ function Home({ toDos, addToDo }) {
   const onSubmit = (e) => {
     e.preventDefault();
     setText("");
-    addToDo(text);
+    const id = Date.now();
+    localStorage.setItem(id, text);
+    addToDo({ text, id });
   };
 
   return (
@@ -37,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToDo: (text) => dispatch(add(text)),
+    addToDo: (info) => dispatch(add(info)),
   };
 };
 

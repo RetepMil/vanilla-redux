@@ -13,7 +13,10 @@ const ToDo = ({ text, id, onBtnClick }) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onBtnClick: () => dispatch(remove(ownProps.id)),
+    onBtnClick: () => {
+      localStorage.removeItem(ownProps.id);
+      dispatch(remove(ownProps.id));
+    },
   };
 };
 

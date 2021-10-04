@@ -1,11 +1,16 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+const keys = Object.keys(localStorage);
+const initialState = keys.map((id) => {
+  return { text: localStorage.getItem(id), id };
+});
+
 const toDos = createSlice({
   name: "toDosReducer",
-  initialState: [],
+  initialState,
   reducers: {
     add: (state, action) => [
-      { text: action.payload, id: Date.now() },
+      { text: action.payload.text, id: action.payload.id },
       ...state,
     ],
     remove: (state, action) =>
